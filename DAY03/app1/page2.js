@@ -4,7 +4,7 @@
 // there are 3 ways to create Object in JS.
 
 /**
- * - Object literal (JSON)
+ * - Object literal (JSON
  * - Using Object root function
  * - Using Contructor function
  */
