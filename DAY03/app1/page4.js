@@ -43,11 +43,25 @@ function function2(){
         {model : 'i22', company : 'company3', price : 20},
         {model : 'i23', company : 'company4', price : 27},
         {model : 'i24', company : 'company5', price : 80},
-        {model : 'i24', company : 'company6', price : 5},
-        {model : 'i25', company : 'company7', price : 10},
+        {model : 'i25', company : 'company6', price : 5},
+        { model : 'i25',company : 'company7'},
     ]
 
     //arrays of cars having cars model and price
     //find out offordable cars (price <= 10)
     //find out non-offordable car's (price > 10)
+
+    //Condition 01 :
+    const car = cars.filter(c => c.model != null && c.price > 0)
+    // console.log('Cars Having M and P : ',car)
+
+    //Conditon 02 :
+    const c2 = cars.filter(c => c.price <= 10)
+    // console.log('Cars having Offordable : ',c2)
+
+    //Conditon 03 : 
+    const c3 = cars.filter(c => c.price > 10)
+    console.log('Cars having non-Offordable : ',c3)
+
 }
+function2()
