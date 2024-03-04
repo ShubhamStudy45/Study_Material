@@ -41,10 +41,25 @@ function function3(){
 }
 
 
-function3()
+// function3()
 
 
+//WRP to convert tempature fahrenheit to celsius
+//Celsius (°C) = (Fahrenheit - 32) / 1.8
 
+function function4(){
+    //Temp in F
+    const tempature = [ 91,92,93,94,95,96,99,98 ]
+
+
+    //Temp in C
+    const celsius = tempature.map((f)=>{
+        return((f-32)/1.8)
+    })
+    console.log('Temp in C: ',celsius)
+}
+
+function4()
 
 
 
