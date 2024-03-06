@@ -42,7 +42,6 @@ function Asynchronous(){
 
 Asynchronous()
 
-//3:47:32
 
 
 
