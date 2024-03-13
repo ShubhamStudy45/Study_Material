@@ -2,6 +2,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const config = require('./config')
 const userRoutes = require('./routes/user')
 
 const app = express()
@@ -10,13 +11,32 @@ const app = express()
 
 app.use(bodyParser.json())
 
-app.get('/',(request, response)=>{
+app.use((request,response,next)=>{
 
-    const { token } = request.params
+    const token = request.headers['token']
 
     console.log(token)
+    if(request.url.startsWith('/user/signin')||
+    request.url.startsWith('/user/signup')){
+        next()
+    }else{
 
-    response.send()
+        try{
+
+            const payload = jwt.verify(token, config.secrete)
+            request.userId = payload['id']
+            console.log(request.userId)
+            next()
+        }catch(ex){
+            response.send({
+                status : 'error',
+                error : 'unathorized access..!!'
+            })
+        }
+    }
+    
+    
+
 })
 
 //middleware function
@@ -25,4 +45,3 @@ app.listen(3000,'0.0.0.0',()=>{
     console.log('server started on port 3000')
 })
 
-//52:21

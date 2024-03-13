@@ -4,7 +4,7 @@ const cryptoJs = require('crypto-js')
 //import jsonweb token to provide the security to user data
 const jwt = require('jsonwebtoken')
 
-const secrete = require('../secreteKey')
+const config = require('../config')
 const db = require('../db')
 const createResult = require('../createResult')
 const route = express.Router()
@@ -57,10 +57,9 @@ route.post('/signin',(request, response)=>{
             }else{
 
                 const user = users[0]
-                const userId = user.id
-            
-                const token = jwt.sign(userId,secrete)
-                // console.log(token)
+                // const userId = user.id
+                // console.log(userId)
+                const token = jwt.sign({id : user['id']},config.secrete)
                 result['status'] = 'success'
                 result['data'] = {
                     token : token,  
@@ -75,6 +74,17 @@ route.post('/signin',(request, response)=>{
             
         }
         response.send(result)
+    })
+})
+
+route.get('/profile',(request,response)=>{
+
+    // const { id } = request.params
+
+    const statement = `select id, firstname, lastname, email, phone, status from user where id = ${request.userId}`
+
+    db.execute(statement,(error,data)=>{
+        response.send(createResult(error,data))
     })
 })
 module.exports = route
