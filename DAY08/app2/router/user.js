@@ -8,6 +8,7 @@ route.post('/signup',(request, response)=>{
 
     const { firstName, lastName, email, password } = request.body
 
+    console.log(request.body)
     const encryptPassword = '' + cryptoJs.SHA256(password)
     const statement = `insert into user
                         (firstname, lastname, email, password, status)
