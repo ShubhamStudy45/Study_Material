@@ -1,7 +1,9 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const db = require('../db')
 const cryptoJs = require('crypto-js')
 const utils = require('../utils')
+const config = require('../config')
 const route = express.Router()
 
 route.post('/signup',(request, response)=>{
@@ -41,7 +43,7 @@ route.post('/signin',(request, response)=>{
         }else{
             if(users.length <= 0){
                 result['status'] = 'error'
-                result['error'] = "User doesn't exist..!!"
+                result['error'] = "User doesn't exist or pls check password..!!"
             }else{
 
                 const user = users[0]
@@ -55,9 +57,14 @@ route.post('/signin',(request, response)=>{
                     result['error'] = "Account has been blocked. Pls contact administration..!!"
                 }else if(user.status == 1){
 
+                    const payload = {
+                        id : user['id']
+                    }
+                    const token = jwt.sign(payload,config.secrete)
+                    // console.log(token)
                     result['status'] = 'success'
                     result['data'] = {
-                        id : user.id,
+                        token : token,
                         firstname : user['firstname'],
                         lastname : user['lastname'],
                         email : user['email'],
@@ -73,6 +80,17 @@ route.post('/signin',(request, response)=>{
     })
 })
 
+route.get('/profile',(request, response)=>{
+
+    // const { id } = request.params
+    const statement = `select id, firstname, lastname, email, phone, status
+                        from user
+                        where id = ${request.userId}`
+    // console.log(statement)
+    db.execute(statement,(error,data)=>{
+        response.send(utils.createResult(error,data))
+    })
+})
 route.patch('/admin/:id',(request, response)=>{
 
     const { id } = request.params
