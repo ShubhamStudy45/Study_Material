@@ -3,10 +3,10 @@ const db = require('../db')
 const utils = require('../utils')
 const route = express.Router()
 
-route.get('/:id',(request, response)=>{
+route.get('/',(request, response)=>{
 
-    const { id } = request.body
-    const statement = `select * from company where id = '${id}'`
+    // const { id } = request.body
+    const statement = `select * from product`
     db.execute(statement,(error, data)=>{
         response.send(utils.createResult(error,data))
     })
@@ -15,11 +15,11 @@ route.get('/:id',(request, response)=>{
 
 route.post('/',(request, response)=>{
 
-    const { title, description } = request.body
-    const statement = `insert into company
-                        ( title, description )
+    const { title, description, price, category, company } = request.body
+    const statement = `insert into product
+                        ( title, description, price, category, company )
                         values
-                        ('${title}','${description}')`
+                        ('${title}','${description}',${price},${category},${company})`
     db.execute(statement,(error, data)=>{
         response.send(utils.createResult(error,data))
     })
@@ -28,11 +28,11 @@ route.post('/',(request, response)=>{
 route.put('/:id',(request, response)=>{
 
     const { id } = request.body
-    const { title, description } = request.body
+    const { title, description, price, category, company } = request.body
 
-    const statement = `update company
+    const statement = `update product
                         set
-                        title = '${title}' and description = '${description}' 
+                        title = '${title}', description = '${description}, price = ${price}, category = ${category}, company = ${company}' 
                         where id = '${id}'`
     db.execute(statement,(error, data)=>{
         response.send(utils.createResult(error,data))
@@ -42,7 +42,7 @@ route.put('/:id',(request, response)=>{
 route.delete('/:id',(request, response)=>{
 
     const { id } = request.body
-    const statement = `delete from company where id = '${id}'`
+    const statement = `delete from product where id = '${id}'`
     db.execute(statement,(error, data)=>{
         response.send(utils.createResult(error,data))
     })
