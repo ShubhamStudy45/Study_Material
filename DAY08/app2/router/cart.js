@@ -6,7 +6,7 @@ const route = express.Router()
 route.get('/',(request, response)=>{
     
 
-    const statement = `select us.id as userid, p.title as "product name", co.title as "brand", 
+    const statement = `select crt.id as cartid, p.title as "product name", co.title as "brand", 
     p.description as "product description", p.price as "product price", 
     crt.quantity as "quantity" from cart crt inner join 
     product p on p.id = crt.product 
