@@ -6,7 +6,7 @@ const route = express.Router()
 route.get('/',(request, response)=>{
     
 
-    const statement = `select crt.id as cartid, p.title as "product name", co.title as "brand", 
+    const statement = `select crt.id as cartId, crt.product as productId, p.title as "product name", co.title as "brand", 
     p.description as "product description", p.price as "product price", 
     crt.quantity as "quantity" from cart crt inner join 
     product p on p.id = crt.product 
@@ -44,7 +44,9 @@ route.patch('/',(request, response)=>{
 })
 route.delete('/',(request, response)=>{
     
-    const statement = `delete from cart where user = ${request.userId}`
+    const { productId } = request.body
+    const statement = `delete from cart where product = ${productId} and user = ${request.userId}`
+
     db.execute(statement,(error, data)=>{
         response.send(utils.createResult(error,data))
     })
