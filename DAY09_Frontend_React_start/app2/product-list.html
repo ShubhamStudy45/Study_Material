@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        h1{
+            margin-left: 300px;
+        }
+        table{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body onload="loadProducts()">
+    <div class="container">
+        <h1>Products List</h1>
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                
+            </tbody>
+        </table>
+        <script src="jq/jquery.js"></script>
+        <script>
+            function loadProducts(){
+
+                $.ajax({
+                    method : 'GET',
+                    url : 'http://localhost:3000/product',
+                    success : (response)=>{
+                        // console.log(response)
+                        if(response['status'] == 'success'){
+                            const products = response['data']
+                            // console.log(products)
+                            let tbody = ``
+                            for (let index = 0; index < products.length; index++) {
+                                const product = products[index];
+                                tbody += `<tr>`
+                                tbody += `<td>${index + 1}</td>`
+                                tbody += `<td>${product['title']}</td>`
+                                tbody += `<td>${product['description']}</td>`
+                                tbody += `<td>${product['category']}</td>`
+                                tbody += `<td>${product['price']}</td>`
+                                tbody += `</tr>`
+
+                            }
+                            $('#tbody').html(tbody)
+                        }
+                    },
+                    error : (error)=>{
+                        console.log(error)
+                    }
+                })
+
+            }
+
+        </script>
+    </div>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</head>
+<body onload="loadProduct()">
+    <div class="container">
+        <h1>Product List</h1>
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+
+        <script src="jq/jquery.js"></script>
+            <script>
+                function loadProduct(){
+                    const response = 
+                    
+                        {
+                            "status": "success",
+                            "data": [
+                            {
+                                "id": 1,
+                                "title": "iphone",
+                                "description": "iphone description",
+                                "price": 80000,
+                                "category": 1,
+                                "company": 1
+                            },
+                            {
+                                "id": 2,
+                                "title": "puma",
+                                "description": "puma description",
+                                "price": 1500,
+                                "category": 2,
+                                "company": 2
+                            },
+                            {
+                                "id": 3,
+                                "title": "zara",
+                                "description": "zara description",
+                                "price": 2000,
+                                "category": 3,
+                                "company": 3
+                            },
+                            {
+                                "id": 4,
+                                "title": "bracelete",
+                                "description": "bracelete description",
+                                "price": 1000,
+                                "category": 2,
+                                "company": 1
+                            },
+                            {
+                                "id": 5,
+                                "title": "bag",
+                                "description": "bag description",
+                                "price": 1000,
+                                "category": 2,
+                                "company": 1
+                            },
+                            {
+                                "id": 6,
+                                "title": "title6",
+                                "description": "description for product 6",
+                                "price": 43345.4296875,
+                                "category": 3,
+                                "company": 3
+                            },
+                            {
+                                "id": 7,
+                                "title": "title7",
+                                "description": "description for product 7",
+                                "price": 2000,
+                                "category": 2,
+                                "company": 1
+                            },
+                            {
+                                "id": 8,
+                                "title": "product 08",
+                                "description": "description product 08",
+                                "price": 8000,
+                                "category": null,
+                                "company": null
+                            },
+                            {
+                                "id": 9,
+                                "title": "product1",
+                                "description": "product1 description",
+                                "price": 1000,
+                                "category": 2,
+                                "company": 1
+                            },
+                            {
+                                "id": 10,
+                                "title": "product10",
+                                "description": "product10 description",
+                                "price": 2000,
+                                "category": 4,
+                                "company": 3
+                            }
+                        ]
+                        }
+                        
+                    
+                    //console.log(response['data'])
+                    if(response['status'] == 'success'){
+                        const products = response['data']
+                        let tbody = ``
+                        for(let index = 0; index < products.length; index++){
+                            const product = products[index]
+                            tbody += `<tr>`
+                            tbody += `<td>${index + 1}</td>`
+                            tbody += `<td>${product['title']}</td>`
+                            tbody += `<td>${product['description']}</td>`
+                            tbody += `<td>${product['category']}</td>`
+                            tbody += `<td>${product['price']}</td>`
+                            // console.log(product['title'])
+                            tbody += `<td></td>`
+                            // tobody += `<tr><button class="btn btn-primary"></button>`
+                            tbody += `</tr>`
+                        }
+
+                        $('#tbody').html(tbody)
+
+                    }      
+                    
+                }
+                
+            </script>
+    </div>
+</body>
+</html>
+-->
+
+
+
