@@ -1,0 +1,15 @@
+JSX :
+
+JSX is a library
+JavaScript SML
+Its template used by React to create a user interface
+
+const template = 'this is the template data'
+const root = document.getElementById('app')
+ReactDOM.render(template, root)
+
+if you want to put html tag (below EX) inside the JSX then we should use babel 
+
+const template = <h2>this is the template data</h2> --> would not work in JSX
+
+babel is nothing but the transpiler or complier or JavaScript complier
