@@ -1,0 +1,18 @@
+.title {
+  text-align: center;
+  height: 100px;
+  padding: 20px;
+  background-color: cornflowerblue;
+  color: white;
+}
+.add-todo {
+  padding: 10px;
+  background-color: tan;
+}
+.add-todo textarea {
+  resize: none;
+}
+.Todo-List {
+  padding: 10px;
+  background-color: lightblue;
+}
