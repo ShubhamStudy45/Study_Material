@@ -1,0 +1,36 @@
+.title {
+  text-align: center;
+  height: 100px;
+  padding: 20px;
+  background-color: cornflowerblue;
+  color: white;
+}
+.add-todo {
+  padding: 5px;
+  background-color: tan;
+}
+.add-todo textarea {
+  resize: none;
+}
+.Todo-List {
+  padding: 10px;
+  background-color: lightblue;
+}
+.footer {
+  text-align: center;
+  resize: none;
+  font-style: italic;
+  color: red;
+}
+.errorMSg {
+  padding-right: 25px;
+  font-size: 15px;
+  color: red;
+  font-style: italic;
+}
+.button-complete {
+  cursor: pointer;
+}
+.btn-warning {
+  margin: 10px;
+}
