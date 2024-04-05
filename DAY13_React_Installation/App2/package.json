@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "create-react-app": "^1.2.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
+  }
+}
