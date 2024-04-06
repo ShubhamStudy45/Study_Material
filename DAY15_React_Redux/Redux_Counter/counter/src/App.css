@@ -1,0 +1,23 @@
+.counterbtn {
+  padding: 10px !important;
+}
+.container {
+  margin: 20px;
+  text-align: center;
+}
+.product {
+  border: solid #ccc 1px;
+  padding: 10px;
+  margin: 10px;
+}
+.product .title .description .price {
+  text-align: left !important;
+}
+.cartbutton {
+  margin-right: 20px;
+  margin-top: 10px;
+}
+.cart-count {
+  font-weight: bold;
+  font-size: 20px;
+}
