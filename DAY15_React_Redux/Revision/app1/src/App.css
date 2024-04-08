@@ -1,0 +1,18 @@
+.Header {
+  text-align: center;
+  margin-top: 20px;
+}
+.signinform {
+  margin-top: 30px;
+}
+.products {
+  border: solid #ccc 1px;
+  padding: 10px;
+  margin: 10px;
+}
+.productbtn {
+  margin-top: 10px;
+}
+.addbtn {
+  margin: 6px !important;
+}
