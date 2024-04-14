@@ -10,8 +10,9 @@ route.post("/signin", (request, response) => {
   const { email, password } = request.body
   const decryptPass = "" + cryptoJs.SHA256(password)
   const statement = `select * from user where email = '${email}' and password = '${decryptPass}'`
-
-  //   console.log(statement)
+  // console.log("statement signin : ", statement)
+  // console.log(decryptPass)
+  console.log(password)
   db.execute(statement, (error, users) => {
     const result = {
       status: "",
@@ -21,11 +22,13 @@ route.post("/signin", (request, response) => {
       result["status"] = "error"
       result["error"] = error
     } else {
-      if (users.length <= 0) {
+      const user = users[0]
+      // console.log(users.length)
+      // console.log("user status : ", user["status"])
+      if (users.length == 0) {
         result["status"] = "error"
         result["error"] = "user doesn't exist or check email and password..!!"
       } else {
-        const user = users[0]
         if (user["status"] == 0) {
           result["status"] = "error"
           result["error"] = "user does not verified account..!!"
@@ -39,7 +42,7 @@ route.post("/signin", (request, response) => {
           }
 
           const token = jwt.sign(payload, secrete.secrete)
-        //   console.log(token)
+          console.log("backend token : ", token)
           result["status"] = "success"
           result["data"] = {
             token: token,
@@ -66,7 +69,13 @@ route.post("/signup", (request, response) => {
     values
         ('${firstName}','${lastName}','${email}','${encryptPass}',0)`
 
-  //   response.send(statement)
+  console.log("backend signup:", statement)
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+route.get("/profile", (request, response) => {
+  const statement = `select * from user where id = ${request.userid}`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })

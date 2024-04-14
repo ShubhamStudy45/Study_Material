@@ -4,26 +4,32 @@ const db = require("../db")
 const utils = require("../utils")
 const route = express.Router()
 
-route.get("/get-notes/:userid", (request, response) => {
-  const { userid } = request.params
+route.get("/get-notes/", (request, response) => {
+  // const { userid } = request.params
 
-  const statement = `select * from notes where userid = ${userid}`
+  const statement = `select * from notes where userid = ${request.userid}`
   db.execute(statement, (error, data) => {
     response.send(utils.createResult(error, data))
   })
 })
-route.post("/add-notes/:userid", (request, response) => {
+route.post("/add-notes/", (request, response) => {
   const { title, contents } = request.body
-  const { userid } = request.params
 
   const statement = `
   insert into notes
         (title, contents, userId)
     values
-        ('${title}', '${contents}', ${userid})`
+        ('${title}', '${contents}', ${request.userid})`
 
-  db.execute(statement,(error,data)=>{
-    response.send(utils.createResult(error,data))
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
+route.delete("/delete-note/:noteid", (request, response) => {
+  const { noteid } = request.params
+  const statement = `delete from notes where userid=${request.userid} and id=${noteid} `
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
   })
 })
 module.exports = route
