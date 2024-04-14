@@ -6,6 +6,7 @@ import NotesScreen from "./screens/NotesScreen"
 import SignupScreen from "./screens/SignupScreen"
 import AddNoteScreen from "./screens/AddNoteScreen"
 import AboutScreen from "./screens/AboutScreen"
+import EditNoteScreen from "./screens/EditNoteScreen"
 function App() {
   return (
     <div>
@@ -18,6 +19,7 @@ function App() {
             <Route path="/notes" element={<NotesScreen />}></Route>
             <Route path="/add-notes" element={<AddNoteScreen />}></Route>
             <Route path="/about" element={<AboutScreen />}></Route>
+            <Route path="/edit-notes" element={<EditNoteScreen />}></Route>
           </Routes>
         </Router>
       </div>

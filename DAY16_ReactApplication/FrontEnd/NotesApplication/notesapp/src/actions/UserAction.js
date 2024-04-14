@@ -1,10 +1,18 @@
 import {
+  URL,
+  USER_SIGNIN_FAIL,
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNOUT,
   USER_SIGNUP_FAIL,
   USER_SIGNUP_REQUEST,
   USER_SIGNUP_SUCCESS,
 } from "../constants/UserConstants"
 import axios from "axios"
-export const signup = (firstName, lastName, email, Password) => {
+
+//Signup
+export const signup = (firstName, lastName, email, password) => {
+  console.log("password in signup action:", password)
   return (dispatch) => {
     dispatch({
       type: USER_SIGNUP_REQUEST,
@@ -16,13 +24,13 @@ export const signup = (firstName, lastName, email, Password) => {
       },
     }
 
-    const url = "http://localhost:4000/user/signup"
+    const url = URL + "/user/signup"
 
     const body = {
       firstName,
       lastName,
       email,
-      Password,
+      password,
     }
     axios
       .post(url, body, header)
@@ -40,5 +48,47 @@ export const signup = (firstName, lastName, email, Password) => {
           payload: error,
         })
       })
+  }
+}
+
+//Signin
+export const signin = (user = {}) => {
+  return (dispatch) => {
+    dispatch({
+      type: USER_SIGNIN_REQUEST,
+    })
+
+    const header = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+    const url = URL + "/user/signin"
+
+    axios
+      .post(url, user, header)
+      .then((response) => {
+        dispatch({
+          type: USER_SIGNIN_SUCCESS,
+          payload: response.data,
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: USER_SIGNIN_FAIL,
+          error: error,
+        })
+      })
+  }
+}
+
+//logout
+export const logout = () => {
+  return (dispatch) => {
+    sessionStorage.removeItem("token")
+    dispatch({
+      type: USER_SIGNOUT,
+    })
+    document.location.href = "/signin"
   }
 }

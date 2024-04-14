@@ -6,10 +6,20 @@ import logger from "redux-logger"
 import { thunk } from "redux-thunk"
 import { combineReducers } from "redux"
 
-import { SignupReducer } from "./reducers/UserReducer"
-
+import { SignupReducer, SigninReducer } from "./reducers/UserReducer"
+import {
+  addNoteReducer,
+  fetchNoteReducer,
+  deleteNoteReducer,
+  editNoteReducer,
+} from "./reducers/NoteReducer"
 const reducers = combineReducers({
   userSignup: SignupReducer,
+  userSignin: SigninReducer,
+  addnote: addNoteReducer,
+  notes: fetchNoteReducer,
+  deletenotes: deleteNoteReducer,
+  editNotes: editNoteReducer,
 })
 
 let store = createStore(
