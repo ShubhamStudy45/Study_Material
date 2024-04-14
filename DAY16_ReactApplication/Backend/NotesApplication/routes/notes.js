@@ -32,4 +32,13 @@ route.delete("/delete-note/:noteid", (request, response) => {
     response.send(utils.createResult(error, data))
   })
 })
+route.put("/edit-note/:noteid", (request, response) => {
+  const { noteid } = request.params
+  const { title, contents } = request.body
+  const statement = `update notes set title = '${title}', contents = '${contents}' where id=${noteid}`
+
+  db.execute(statement, (error, data) => {
+    response.send(utils.createResult(error, data))
+  })
+})
 module.exports = route
